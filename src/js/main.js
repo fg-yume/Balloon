@@ -5,11 +5,11 @@ var app = app || {};
 
 // Globals ------------------------------
 app.GAME_STATE = {
-	MAIN : 0
-	INSTRUCTION : 1
-	GAME : 2
-	CREDITS : 3
-	PAUSE : 4
+	MAIN : 0,
+	INSTRUCTION : 1,
+	GAME : 2,
+	CREDITS : 3,
+	PAUSE : 4,
 	
 	NUM_STATES : 5
 };
