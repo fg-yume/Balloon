@@ -5,13 +5,13 @@ var app = app || {};
 
 // Globals ------------------------------
 app.GAME_STATE = {
-	MAIN,
-	INSTRUCTION,
-	GAME,
-	CREDITS,
-	PAUSE,
+	MAIN : 0
+	INSTRUCTION : 1
+	GAME : 2
+	CREDITS : 3
+	PAUSE : 4
 	
-	INVALID_STATE
+	NUM_STATES : 5
 };
 
 // main method to handle updating the game
