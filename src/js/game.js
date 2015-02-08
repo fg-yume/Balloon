@@ -22,6 +22,10 @@ app.game = {
 	buttonPlay		: undefined,
 	buttonInstruction: undefined,
 
+	// graphics
+	x1				: 0,
+	x2				: 3000,
+
 
 	// functions ------------------------------
 	
@@ -186,9 +190,17 @@ app.game = {
 				// draw scrolling background
 				this.totalTime += this.timeElapsed;
 
-				//ctx.drawImage(app.resources.bg.background, 0, 0, 565, 130);
-    			//ctx.drawImage(app.resources.bg.background, 565, 0, 565, 130);
-    			//ctx.drawImage(app.resources.bg.background, 0, 0, 1190, 755, 450, 15, 100, 60);
+				app.ctx.drawImage(app.resources.bg.background, this.x1, 0, 3000, 700);
+    			app.ctx.drawImage(app.resources.bg.background, this.x2, 0, 3000, 700);
+
+    			this.x1 -= 1;
+    			this.x2 -= 1;
+
+    			if(this.x1===-3000) {
+    				this.x1+=6000;
+    			} else if(this.x2===-3000) {
+    				this.x2+=6000;
+    			}
 
 				//app.ctx.save(); 
 				//app.ctx.translate(-bgPosX, 0);
