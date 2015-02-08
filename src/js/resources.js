@@ -16,6 +16,11 @@ app.resources = {
 	tacoLoaded		: false,
 	chickenLoaded	: false,
 
+	trackLoaded		: false,
+	biteLoaded		: false,
+	drinkLoaded		: false,
+	gameOverLoaded	: false,
+
 	homeScreenLoaded	: false,
 	rulesScreenLoaded	: false,
 	creditsScreenLoaded	: false,
@@ -43,6 +48,14 @@ app.resources = {
 		soda		: new Image(),
 		donut		: new Image(),
 		taco        : new Image()
+	},
+
+	// soundtrack
+	audio : {
+		track		: new Audio("audio/Track.ogg"),
+		bite		: new Audio("audio/bite.ogg"),
+		drink		: new Audio("audio/drink.ogg"),
+		gameOver	: new Audio("audio/Game Over.ogg")
 	},
 
 	// screens available
@@ -101,6 +114,20 @@ app.resources = {
 		});
 		this.food.donut.addEventListener("load", function(){
 			app.resources.donutLoaded = true;
+		});
+
+
+		this.audio.track.addEventListener("load", function(){
+			app.resources.trackLoaded = true;
+		});
+		this.audio.bite.addEventListener("load", function(){
+			app.resources.biteLoaded = true;
+		});
+		this.audio.drink.addEventListener("load", function(){
+			app.resources.drinkLoaded = true;
+		});
+		this.audio.gameOver.addEventListener("load", function(){
+			app.resources.gameOverLoaded = true;
 		});
 
 
@@ -167,7 +194,7 @@ app.resources = {
 	},
 	
 	/*
-	 * Updates done loaded to be true when all the art has been
+	 * Updates done loaded to be true when all the art and music has been
 	 * loaded
 	 */
 	update : function()

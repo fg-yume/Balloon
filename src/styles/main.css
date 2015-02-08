@@ -27,14 +27,23 @@ html, body, #mapCanvas {
   background-color: #afe1f2;
 }
 #mapShell {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   height: 500px;
   width: 1000px;
 }
 #sliderShell {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   height: 20px;
   width: 1000px;
 }
 #labelShell {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   height: 20px;
   width: 1000px;
 }
@@ -42,6 +51,24 @@ html, body, #mapCanvas {
   width: 50%;
   margin-left: 25%;
   margin-top: 10px;
+}
+#buttonShell {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+#startButton {
+  color: white;
+  font-family: Arial, sans-serif;
+  background-color: #8888aa;  
+  margin: 0 auto 0 auto;
+  display: block;
+}
+#scrolling {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 /* Formatting for the search bar */
 #pac-input {

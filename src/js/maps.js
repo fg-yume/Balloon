@@ -20,6 +20,9 @@ app.maps = {
 	hitMap : [],
 	// Stores images that need to be painted and repainted
 	img : [],
+	// Used by mainSearch
+	searchBox : undefined,
+	service : undefined,
 
 	/*
 	 * Initializes the map using the google maps API
@@ -41,10 +44,10 @@ app.maps = {
         // Set up the search box
         var input = document.getElementById('pac-input');
         this.map.controls[google.maps.ControlPosition.TOP].push(input);
-        var searchBox = new google.maps.places.SearchBox(input);
+        this.searchBox = new google.maps.places.SearchBox(input);
 
         // Set up the radar search
-        var service = new google.maps.places.PlacesService(this.map);
+        this.service = new google.maps.places.PlacesService(this.map);
 
         this.draw();
 
@@ -54,14 +57,14 @@ app.maps = {
         this.hitMap['total'] = 0
 
         // Set up the search listener
-        google.maps.event.addListener(searchBox, 'places_changed', function() { app.maps.mainSearch(searchBox, service) });
+        google.maps.event.addListener(this.searchBox, 'places_changed', app.maps.mainSearch);
 	},
 
 	// Invoked every time a player selects a location
-	mainSearch : function(searchBox, service) 
+	mainSearch : function() 
 	{
 	    this.clearMarkers();
-	    var places = searchBox.getPlaces();
+	    var places = this.searchBox.getPlaces();
 	    if(places.length===0) 
 	    {
 	      return;
@@ -106,7 +109,7 @@ app.maps = {
 	        radius: document.getElementById('slider').value * 8 + 200,
 	        name: this.fastFood[element]
 	      }
-	      service.radarSearch(request, function(results, status) { app.maps.callback(results, status, app.maps.fastFood[element])})
+	      this.service.radarSearch(request, function(results, status) { app.maps.callback(results, status, app.maps.fastFood[element])})
 	    }
   	},
 
@@ -142,8 +145,6 @@ app.maps = {
 	    }
 
 	    console.log(this.hitMap);
-
-	    //console.log(this.markers);
 	},
 
 	// Accessor for hitMap
@@ -166,6 +167,7 @@ app.maps = {
     {
         var canvas = document.querySelector("#scrolling");
         var ctx = canvas.getContext("2d");
+        var xPos = [0, 565, 1130];
 
         this.img['cityscape'] = new Image();
         this.img['cityscape'].onload = function() {
@@ -179,32 +181,34 @@ app.maps = {
         }
         this.img[2].src = "assets/art/bkgd.png";
 
-        this.img['play'] = new Image();
-        this.img['play'].onload = function() {
-        	ctx.drawImage(app.maps.img['play'], 0, 0, 4000, 1000, 300, 15, 400, 100);
+        this.img[3] = new Image();
+        this.img[3].onload = function() {
+        	ctx.drawImage(app.maps.img[3], 1130, 0, 565, 130);
         }
-        this.img['play'].src = "assets/art/play_button.png";
+        this.img[3].src = "assets/art/bkgd.png";
 
-        window.setInterval(app.maps.update, 1000);
+        window.setInterval(function() {app.maps.update(ctx, xPos)}, 100);
     },
 
-    update : function()
+    update : function(ctx, xPos)
     {
-    	var canvas = document.querySelector("#scrolling");
-    	var ctx = canvas.getContext("2d");
-
     	ctx.clearRect(0,0,1000,130);
-    	// 1190x755
-    	ctx.drawImage(app.maps.img['cityscape'], 0, 0, 565, 130);
-    	ctx.drawImage(app.maps.img[2], 565, 0, 565, 130);
-    	ctx.drawImage(app.maps.img['play'], 0, 0, 1190, 755, 450, 15, 100, 60);
+    	ctx.drawImage(app.maps.img['cityscape'], xPos[0], 0, 565, 130);
+    	ctx.drawImage(app.maps.img[2], xPos[1], 0, 565, 130);
+    	ctx.drawImage(app.maps.img[3], xPos[2], 0, 565, 130);
+    	for(var element in xPos) {
+    		xPos[element] -= 1;
+    		if (xPos[element]==-565) {
+    			xPos[element]+= 1695;
+    		}
+    	}
     },
 
     // Used to hide all elements of the map screen
     hide : function() 
     {
         var array = ["pac-input", "mapCanvas", "slider", "sliderShell", "labelShell", "label1",
-          "label2", "label3", "cityscape-canvas", "scrolling"];
+          "label2", "label3", "cityscape-canvas", "scrolling", "buttonShell", "mapShell"];
         for(element in array) {
           document.getElementById(array[element]).className += " invisible";
         }
