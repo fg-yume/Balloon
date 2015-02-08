@@ -4,6 +4,7 @@ var app = app || {};
 
 app.maps = {
 
+	app.audio.bite();
 	// Markers are stored after creation so they can be deleted properly later
 	markers : [],
 	// Simple array of search terms
@@ -186,33 +187,35 @@ app.maps = {
         	ctx.drawImage(app.maps.img[3], 1130, 0, 565, 130);
         }
         this.img[3].src = "assets/art/bkgd.png";
-
-        window.setInterval(function() {app.maps.update(ctx, xPos)}, 100);
+		window.setInterval(function() {app.maps.update(ctx, xPos)}, 100);
     },
 
     update : function(ctx, xPos)
     {
     	ctx.clearRect(0,0,1000,130);
-    	ctx.drawImage(app.maps.img['cityscape'], xPos[0], 0, 565, 130);
-    	ctx.drawImage(app.maps.img[2], xPos[1], 0, 565, 130);
-    	ctx.drawImage(app.maps.img[3], xPos[2], 0, 565, 130);
-    	for(var element in xPos) {
-    		xPos[element] -= 1;
-    		if (xPos[element]==-565) {
-    			xPos[element]+= 1695;
-    		}
-    	}
-    },
+		ctx.drawImage(app.maps.img['cityscape'], xPos[0], 0, 565, 130);
+		ctx.drawImage(app.maps.img[2], xPos[1], 0, 565, 130);
+		ctx.drawImage(app.maps.img[3], xPos[2], 0, 565, 130);
+		for(var element in xPos) {
+			xPos[element] -= 1;
+			if (xPos[element]==-565) {
+				xPos[element]+= 1695;
+			}
+		}
+	},
 
     // Used to hide all elements of the map screen
-    hide : function() 
-    {
-        var array = ["pac-input", "mapCanvas", "slider", "sliderShell", "labelShell", "label1",
-          "label2", "label3", "cityscape-canvas", "scrolling", "buttonShell", "mapShell"];
-        for(element in array) {
-          document.getElementById(array[element]).className += " invisible";
-        }
-    },
+    // hide : function() 
+    // {
+    //     var array = ["pac-input", "mapCanvas", "slider", "sliderShell", "labelShell", "label1",
+    //       "label2", "label3", "cityscape-canvas", "scrolling", "buttonShell", "mapShell"];
+    //     for(var element in array) {
+    //     	var id = document.getElementById(array[element]);
+    //     	if(!(id===null)) {
+    //     		id.className += " invisible";
+    //     	}
+    //     }
+    // },
 
     /*
      * sends data from maps over to the game
