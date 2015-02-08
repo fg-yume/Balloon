@@ -20,9 +20,6 @@ app.maps = {
 	hitMap : [],
 	// Stores images that need to be painted and repainted
 	img : [],
-	// Used by mainSearch
-	searchBox : undefined,
-	service : undefined,
 
 	/*
 	 * Initializes the map using the google maps API
@@ -44,10 +41,10 @@ app.maps = {
         // Set up the search box
         var input = document.getElementById('pac-input');
         this.map.controls[google.maps.ControlPosition.TOP].push(input);
-        this.searchBox = new google.maps.places.SearchBox(input);
+        var searchBox = new google.maps.places.SearchBox(input);
 
         // Set up the radar search
-        this.service = new google.maps.places.PlacesService(this.map);
+        var service = new google.maps.places.PlacesService(this.map);
 
         this.draw();
 
@@ -57,14 +54,14 @@ app.maps = {
         this.hitMap['total'] = 0
 
         // Set up the search listener
-        google.maps.event.addListener(this.searchBox, 'places_changed', app.maps.mainSearch);
+        google.maps.event.addListener(searchBox, 'places_changed', function() {app.maps.mainSearch(searchBox, service)});
 	},
 
 	// Invoked every time a player selects a location
-	mainSearch : function() 
+	mainSearch : function(searchBox, service) 
 	{
 	    this.clearMarkers();
-	    var places = this.searchBox.getPlaces();
+	    var places = searchBox.getPlaces();
 	    if(places.length===0) 
 	    {
 	      return;
@@ -109,7 +106,7 @@ app.maps = {
 	        radius: document.getElementById('slider').value * 8 + 200,
 	        name: this.fastFood[element]
 	      }
-	      this.service.radarSearch(request, function(results, status) { app.maps.callback(results, status, app.maps.fastFood[element])})
+	      service.radarSearch(request, function(results, status) { app.maps.callback(results, status, app.maps.fastFood[element])})
 	    }
   	},
 

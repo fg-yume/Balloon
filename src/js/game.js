@@ -25,6 +25,9 @@ app.game = {
 	// graphics
 	x1				: 0,
 	x2				: 3000,
+	SPAWN_BASE		: 60,
+	timeUntilNextSpawn : 60,
+
 
 
 	// functions ------------------------------
@@ -42,6 +45,7 @@ app.game = {
 		this.obstacles = new Array();
 
 		this.difficulty = jsonData.total;
+		this.SPAWN_BASE -= this.difficulty;
 		console.log("difficulty: " + this.difficulty);
 		
 		// Create obstacles
@@ -82,6 +86,45 @@ app.game = {
 		
 		app.animationID = requestAnimationFrame(this.loop.bind(this));
 	},
+
+	spawnEnemy : function() 
+	{
+		console.log('checkpoint');
+		var randomEnemy = Math.floor(Math.random() * 9) + 0;
+		var obstacle;
+
+		var randomY = Math.floor(Math.random() * app.canvas.height) + 0;
+
+		switch(randomEnemy)
+		{
+			case 0:
+			{
+				obstacle = new app.Obstacle(app.resources.food.burger, app.canvas.width + 50, randomY);
+				break;
+			}
+			case 1:
+			{
+				obstacle = new app.Obstacle(app.resources.food.fries, app.canvas.width + 50, randomY);
+				break;
+			}
+			case 2:
+			{
+				obstacle = new app.Obstacle(app.resources.food.icecream, app.canvas.width + 50, randomY);
+				break;
+			}
+			case 3:
+			{
+				obstacle = new app.Obstacle(app.resources.food.pizza, app.canvas.width + 50, randomY);
+				break;
+			}
+			default:
+			{
+				obstacle = new app.Obstacle(app.resources.food.hotdog, app.canvas.width + 50, randomY);
+				break;
+			}
+		}
+		this.obstacles.push(obstacle);
+	},
 	
 	/*
 	 * Updates the game
@@ -94,6 +137,7 @@ app.game = {
 		// check time elapsed
 		var timeNow = new Date().getTime();
 		this.timeElapsed = timeNow - this.previousTime;
+
 		
 		// set previous time
 		this.previousTime = timeNow;
@@ -138,7 +182,12 @@ app.game = {
 			// GAME
 			case app.GAME_STATE.GAME:
 			{
-
+				this.timeUntilNextSpawn -= 1;
+				console.log(this.timeUntilNextSpawn);
+				if(this.timeUntilNextSpawn <= 0) {
+					this.timeUntilNextSpawn = this.SPAWN_BASE;
+					this.spawnEnemy();
+				}
 				// update obstacles
 				for(var key in this.obstacles){
 					this.obstacles[key].update(this.timeElapsed);
