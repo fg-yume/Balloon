@@ -18,8 +18,8 @@ app.Player = (function()
 	 */
 	var Player = function()
 	{
-		this.hp		= 3;
-		this.speed	= 10;
+		this.hp		= 2;
+		this.speed	= 15;
 		this.x		= 300;
 		this.y		= 40; //app.canvas.height - 100.0;
 		this.z		= app.Player.MAX_Z;			// "z axis for depth"
@@ -85,7 +85,7 @@ app.Player = (function()
 		app.ctx.save();
 
 		// offset the image based on the amount of hp the player has left
-		app.ctx.drawImage(app.resources.player, (this.currentFrame + (12-4*this.hp)) * 800, 0, 800, 800, this.x, this.y, 150, 150);
+		app.ctx.drawImage(app.resources.player, (this.currentFrame + (8-4*this.hp)) * 800, 0, 800, 800, this.x, this.y, 150, 150);
 
 		app.ctx.restore();
 	};

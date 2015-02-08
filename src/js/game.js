@@ -25,7 +25,7 @@ app.game = {
 	// graphics
 	x1				: 0,
 	x2				: 3000,
-	SPAWN_BASE		: 60,
+	SPAWN_BASE		: 120,
 	timeUntilNextSpawn : 60,
 
 
@@ -117,9 +117,29 @@ app.game = {
 				obstacle = new app.Obstacle(app.resources.food.pizza, app.canvas.width + 50, randomY);
 				break;
 			}
-			default:
+			case 4:
 			{
 				obstacle = new app.Obstacle(app.resources.food.hotdog, app.canvas.width + 50, randomY);
+				break;
+			}
+			case 5:
+			{
+				obstacle = new app.Obstacle(app.resources.food.chicken, app.canvas.width + 50, randomY);
+				break;
+			}
+			case 6:
+			{
+				obstacle = new app.Obstacle(app.resources.food.soda, app.canvas.width + 50, randomY);
+				break;
+			}
+			case 7:
+			{
+				obstacle = new app.Obstacle(app.resources.food.donut, app.canvas.width + 50, randomY);
+				break;
+			}
+			case 8:
+			{
+				obstacle = new app.Obstacle(app.resources.food.taco, app.canvas.width + 50, randomY);
 				break;
 			}
 		}
