@@ -59,6 +59,9 @@ html, body, #mapCanvas {
   display: block;
 }
 #startButton {
+  color: white;
+  font-family: Arial, sans-serif;
+  background-color: #8888aa;  
   margin: 0 auto 0 auto;
   display: block;
 }
