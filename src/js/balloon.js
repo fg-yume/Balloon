@@ -41,7 +41,7 @@ app.main = {
 				
 				if(app.resources.doneLoaded == true)
 				{
-					this.currentState = app.APP_STATE.MAP;
+					this.currentState = app.APP_STATE.GAME;
 					console.log(" DONE LOADING ");
 					
 					this.changeAppState();

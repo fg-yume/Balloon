@@ -11,6 +11,7 @@ Modernizr.load(
 			"js/mouse.js",
 			"js/controls.js",
 			"js/obstacle.js",
+			"js/player.js",
 			"js/resources.js",
 			"js/game.js",
 			"js/balloon.js"
@@ -59,15 +60,17 @@ Modernizr.load(
 			/*
 			 * Mark the keydown array with the keys being pressed
 			 */
-			document.querySelector('#canvas').addEventListener('keydown', function(e){
+			window.addEventListener('keydown', function(e){
 				app.input.keydown[e.keyCode] = true;
-				
+				if(app.input.keydown[app.KEYS.ENTER]) {
+					app.maps.mainSearch();
+				}
 			});
 			
 			/*
 			 * Remove the values from the keydown array that are no longer pressed
 			 */
-			document.querySelector('#canvas').addEventListener('keyup', function(e){
+			window.addEventListener('keyup', function(e){
 				if(app.input.keydown[e.keyCode])
 				{
 					delete app.input.keydown[e.keyCode];
