@@ -1,7 +1,7 @@
 /* Main styling for document */
-html, body, #map-canvas {
+html, body, #mapCanvas {
   width: 100%;
-  height: 90%;
+  height: 100%;
   padding: 0;
   margin: 0;
 }
@@ -61,11 +61,10 @@ html, body, #map-canvas {
   padding-left: 14px;
   width: 50%;
 }
-#canvas{
+#canvas {
   padding-left: 0;
   padding-right: 0;
   margin-left: auto;
   margin-right: auto;
   display: block;
-  
 }

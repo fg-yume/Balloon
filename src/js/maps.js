@@ -27,7 +27,7 @@ app.maps = {
 	initialize : function()
 	{
 		// Set up the map settings
-        var mapCanvas = document.querySelector('#map-canvas');
+        var mapCanvas = document.querySelector('#mapCanvas');
         var mapOptions = {
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
@@ -39,7 +39,7 @@ app.maps = {
         this.map.fitBounds(defaultBounds);
 
         // Set up the search box
-        var input = (document.getElementById('pac-input'));
+        var input = document.getElementById('pac-input');
         this.map.controls[google.maps.ControlPosition.TOP].push(input);
         var searchBox = new google.maps.places.SearchBox(input);
 
@@ -180,7 +180,7 @@ app.maps = {
     // Used to hide all elements of the map screen
     hide : function() 
     {
-        var array = ["pac-input", "map-canvas", "slider", "sliderShell", "labelShell", "label1",
+        var array = ["pac-input", "mapCanvas", "slider", "sliderShell", "labelShell", "label1",
           "label2", "label3", "cityscape-canvas", "scrolling"];
         for(element in array) {
           document.getElementById(array[element]).className += " invisible";
