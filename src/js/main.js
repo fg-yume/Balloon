@@ -3,33 +3,39 @@
 // encompass the entire app within this variable
 var app = app || {};
 
-// Globals ------------------------------
-app.GAME_STATE = {
-	MAIN : 0,
-	INSTRUCTION : 1,
-	GAME : 2,
-	CREDITS : 3,
-	PAUSE : 4,
+// different states that the app can be in
+app.APP_STATES = {
+	MAP			: 0,
+	GAME		: 1,
 	
-	NUM_STATES : 5
+	NUM_STATES	: 2
 };
 
 // main method to handle updating the game
 app.main = {
 	
 	// variables ----------------------------
-	currentState : app.GAME_STATE.GAME,
+	currentState : app.APP_STATES.GAME,
 
 	update : function()
 	{
 		// Update input
 	
-		// Update player and obstacles
+		// Update based on the current app states
 		switch(currentState)
 		{
-			case app.GAME_STATE.GAME:
+			case app.APP_STATES.MAP:
 			{
-				updatePlayer();
+				console.log("map state");
+				break;
+			}
+			case app.APP_STATES.GAME:
+			{
+				// Update the game
+				app.game.update();
+				
+				console.log("game state");
+				
 				break;
 			}
 			default:
