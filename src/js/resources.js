@@ -22,6 +22,7 @@ app.resources = {
 	backButtonLoaded	: false,
 
 	backgroundLoaded	: false,
+	backgroundTwoLoaded : false,
 
 	playerLoaded		: false,
 	
@@ -52,7 +53,7 @@ app.resources = {
 	},
 
 	bg : {
-		background	: new Image()
+		background	: new Image(),
 	},
 
 	player 			: new Image(),

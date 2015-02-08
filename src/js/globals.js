@@ -53,5 +53,7 @@ app.KEYS = {
 	RIGHT : 39,
 	DOWN  : 40,
 	PAUSE : 80,
-	ENTER : 13
+	ENTER : 13,
+
+	NUM_KEYS : 6
 }

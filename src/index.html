@@ -5,11 +5,18 @@
   </head>
   
   <body>
-	  <!-- Search box and map -->
+	  
+    <!-- Canvas for game -->
+    <canvas id="canvas" width="1000" height="700"></canvas>
+
+    <!-- Search box and map -->
     <div id="mapShell" class="sky">
       <input id="pac-input" class="controls" type="text" placeholder="Search Box">
       <div id="mapCanvas"></div>
     </div>
+
+    <!-- Button to start game -->
+    <button type="button" id="startButton">Start game</button>
 
     <!-- Slider and labels -->
     <div id="sliderShell" class="sky">
@@ -24,13 +31,13 @@
     <!-- Canvas for scrolling background -->
     <canvas id="scrolling" width="1000" height="130"></canvas>
 
-	  <!-- Canvas for game -->
-  	<canvas id="canvas" width="1000" height="700"></canvas>
+	  
   	
   	<!-- Includes -->
   	<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
   	<script src="js/libraries/modernizr.js"></script>
   	<script src="js/main.js"></script>
+
 	
   </body>
 </html>
