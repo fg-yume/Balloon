@@ -92,6 +92,9 @@ app.maps = {
 	    this.map.setZoom(14);
 
 	    // Clears hitmap
+	    console.log("hitmap before clear: ");
+	    console.log(this.hitMap);
+
 	    for(element in this.hitMap) {
 	      this.hitMap[element] = 0;
 	    }
@@ -110,17 +113,37 @@ app.maps = {
   	// Invoked repeatedly by radarSearch (above)
   	callback : function(results, status, name) 
   	{
+  		console.log(name);
+
 	    // Creates a marker for each hit
-	    for(var element in results) {
+	    for(var element in results)
+	    {
 	      var marker = new google.maps.Marker({
 	        map: this.map,
 	        position: results[element].geometry.location
-	      })
+	      });
+
 	      // Stores the marker and updates the hitMap
 	      this.markers.push(marker);
-	      this.hitMap[name]++;
-	      this.hitMap['total']++;
+
+	      if(this.hitMap[name] === undefined)
+	      	this.hitMap[name] = 1;
+
+	  	  else
+	  	  {
+	  	  	this.hitMap[name] = this.hitMap[name] + 1;
+	  	  }
+
+	      if(this.hitMap['total'] === undefined)
+	      	this.hitMap['total'] = 1;
+
+	      else
+	      	this.hitMap['total'] = this.hitMap['total'] + 1;
 	    }
+
+	    console.log(this.hitMap);
+
+	    //console.log(this.markers);
 	},
 
 	// Accessor for hitMap
@@ -185,5 +208,22 @@ app.maps = {
         for(element in array) {
           document.getElementById(array[element]).className += " invisible";
         }
+    },
+
+    /*
+     * sends data from maps over to the game
+     */
+    sendData : function()
+    {
+    	console.log(this.hitMap);
+
+    	var jsonString = JSON.stringify(this.hitMap);
+
+    	console.log(jsonString);
+
+    	// hide map
+    	document.querySelector("#map-canvas").style.display = "none";
+
+    	app.game.init(this.hitMap);
     }
 };

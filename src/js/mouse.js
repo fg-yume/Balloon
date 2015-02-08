@@ -17,8 +17,8 @@ app.Mouse = (function()
 	
 	Mouse.prototype.update = function(e)
 	{
-		this.pos.x = app.canvas.scrollLeft + e.clientX - app.OFFSET_LEFT;
-		this.pos.y = app.canvas.scrollTop + e.clientY - app.OFFSET_TOP;
+		this.pos.x = -(app.OFFSET_LEFT - e.clientX + app.canvas.scrollLeft); //app.canvas.scrollLeft;// +e.clientX;// - app.OFFSET_LEFT;
+		this.pos.y =   -(app.OFFSET_TOP - e.clientY + app.canvas.scrollTop); //app.canvas.scrollTop ;//+ e.clientY;// - app.OFFSET_TOP;
 		
 		//console.log("[" + this.pos.x + "," + this.pos.y + "]");
 	}

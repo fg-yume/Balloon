@@ -13,6 +13,9 @@ app.main = {
 		console.log("MAIN INIT!");
 		this.currentState = app.APP_STATE.LOADING;
 		app.resources.init();
+
+		// hide our canvas for now
+		app.canvas.style.display = "none";
 		
 		this.loop();
 	},
@@ -41,7 +44,7 @@ app.main = {
 				
 				if(app.resources.doneLoaded == true)
 				{
-					this.currentState = app.APP_STATE.GAME;
+					this.currentState = app.APP_STATE.MAP;
 					console.log(" DONE LOADING ");
 					
 					this.changeAppState();

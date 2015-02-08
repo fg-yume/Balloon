@@ -8,11 +8,12 @@ Modernizr.load(
 		load : [
 			"js/maps.js",
 			"js/globals.js",	
+			"js/utility.js",
 			"js/mouse.js",
 			"js/controls.js",
 			"js/obstacle.js",
-			"js/player.js",
 			"js/resources.js",
+			"js/player.js",
 			"js/game.js",
 			"js/balloon.js"
 		],
@@ -62,8 +63,20 @@ Modernizr.load(
 			 */
 			window.addEventListener('keydown', function(e){
 				app.input.keydown[e.keyCode] = true;
-				if(app.input.keydown[app.KEYS.ENTER]) {
-					app.maps.mainSearch();
+
+				
+				if(app.main.currentState == app.APP_STATE.GAME)
+				{
+					e.preventDefault();
+					app.input.keydown[e.keyCode] = true;
+
+					app.game.player.move(e.keyCode);
+				}
+				
+				if(app.main.currentState == app.APP_STATE.MAP)
+				{
+					if(app.input.keydown[app.KEYS.ENTER])
+						app.maps.mainSearch();
 				}
 			});
 			
@@ -73,7 +86,7 @@ Modernizr.load(
 			window.addEventListener('keyup', function(e){
 				if(app.input.keydown[e.keyCode])
 				{
-					delete app.input.keydown[e.keyCode];
+					app.input.keydown[e.keyCode] = false;
 				}
 			});
 			
@@ -108,6 +121,14 @@ Modernizr.load(
 				app.input.mouse.setState(app.MOUSE_STATE.UP);
 				
 				app.input.mouse.update(e);
+			});
+
+			document.querySelector("#startButton").addEventListener('click', function(e){
+				if(app.main.currentState == app.APP_STATE.MAP)
+				{
+					app.main.currentState == app.APP_STATE.GAME;
+					app.maps.sendData();
+				}
 			});
 			
 			// start up the game
