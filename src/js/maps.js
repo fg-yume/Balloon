@@ -4,7 +4,6 @@ var app = app || {};
 
 app.maps = {
 
-	app.audio.bite();
 	// Markers are stored after creation so they can be deleted properly later
 	markers : [],
 	// Simple array of search terms
