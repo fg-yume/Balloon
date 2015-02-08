@@ -13,7 +13,7 @@ app.Mouse = (function()
 		
 		this.currentState	= app.MOUSE_STATE.UP;
 		this.clicked		= false;
-	}
+	};
 	
 	Mouse.prototype.update = function(e)
 	{
@@ -21,7 +21,13 @@ app.Mouse = (function()
 		this.pos.y =   -(app.OFFSET_TOP - e.clientY + app.canvas.scrollTop); //app.canvas.scrollTop ;//+ e.clientY;// - app.OFFSET_TOP;
 		
 		//console.log("[" + this.pos.x + "," + this.pos.y + "]");
-	}
+	};
+
+	Mouse.prototype.updateClick = function()
+	{
+		if(this.clicked)
+			this.clicked = false;
+	};
 	
 	Mouse.prototype.setState = function(state)
 	{
@@ -52,6 +58,12 @@ app.Mouse = (function()
 				this.clicked = true;
 
 				console.log("[" + this.pos.x + "," + this.pos.y + "]");
+
+				if(app.main.currentState == app.APP_STATE.GAME)
+				{
+					app.game.checkButtons();
+				}
+				
 				break;
 			}
 			
@@ -60,7 +72,7 @@ app.Mouse = (function()
 				this.clicked = false;
 			}
 		}
-	}
+	};
 	
 	return Mouse;
 })();

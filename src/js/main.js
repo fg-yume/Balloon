@@ -8,6 +8,7 @@ Modernizr.load(
 		load : [
 			"js/maps.js",
 			"js/globals.js",	
+			"js/button.js",
 			"js/utility.js",
 			"js/mouse.js",
 			"js/controls.js",
@@ -126,7 +127,7 @@ Modernizr.load(
 			document.querySelector("#startButton").addEventListener('click', function(e){
 				if(app.main.currentState == app.APP_STATE.MAP)
 				{
-					app.main.currentState == app.APP_STATE.GAME;
+					app.main.currentState = app.APP_STATE.GAME;
 					app.maps.sendData();
 				}
 			});

@@ -27,7 +27,7 @@ app.maps = {
 	initialize : function()
 	{
 		// Set up the map settings
-        var mapCanvas = document.querySelector('#map-canvas');
+        var mapCanvas = document.querySelector('#mapCanvas');
         var mapOptions = {
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
@@ -39,7 +39,7 @@ app.maps = {
         this.map.fitBounds(defaultBounds);
 
         // Set up the search box
-        var input = (document.getElementById('pac-input'));
+        var input = document.getElementById('pac-input');
         this.map.controls[google.maps.ControlPosition.TOP].push(input);
         var searchBox = new google.maps.places.SearchBox(input);
 
@@ -54,7 +54,7 @@ app.maps = {
         this.hitMap['total'] = 0
 
         // Set up the search listener
-        google.maps.event.addListener(searchBox, 'places_changed', function() { app.maps.mainSearch(searchBox, service) });
+        google.maps.event.addListener(searchBox, 'places_changed', function() {app.maps.mainSearch(searchBox, service)});
 	},
 
 	// Invoked every time a player selects a location
@@ -142,8 +142,6 @@ app.maps = {
 	    }
 
 	    console.log(this.hitMap);
-
-	    //console.log(this.markers);
 	},
 
 	// Accessor for hitMap
@@ -166,6 +164,7 @@ app.maps = {
     {
         var canvas = document.querySelector("#scrolling");
         var ctx = canvas.getContext("2d");
+        var xPos = [0, 565, 1130];
 
         this.img['cityscape'] = new Image();
         this.img['cityscape'].onload = function() {
@@ -179,36 +178,40 @@ app.maps = {
         }
         this.img[2].src = "assets/art/bkgd.png";
 
-        this.img['play'] = new Image();
-        this.img['play'].onload = function() {
-        	ctx.drawImage(app.maps.img['play'], 0, 0, 4000, 1000, 300, 15, 400, 100);
+        this.img[3] = new Image();
+        this.img[3].onload = function() {
+        	ctx.drawImage(app.maps.img[3], 1130, 0, 565, 130);
         }
-        this.img['play'].src = "assets/art/play_button.png";
-
-        window.setInterval(app.maps.update, 1000);
+        this.img[3].src = "assets/art/bkgd.png";
+		window.setInterval(function() {app.maps.update(ctx, xPos)}, 100);
     },
 
-    update : function()
+    update : function(ctx, xPos)
     {
-    	var canvas = document.querySelector("#scrolling");
-    	var ctx = canvas.getContext("2d");
-
     	ctx.clearRect(0,0,1000,130);
-    	// 1190x755
-    	ctx.drawImage(app.maps.img['cityscape'], 0, 0, 565, 130);
-    	ctx.drawImage(app.maps.img[2], 565, 0, 565, 130);
-    	ctx.drawImage(app.maps.img['play'], 0, 0, 1190, 755, 450, 15, 100, 60);
-    },
+		ctx.drawImage(app.maps.img['cityscape'], xPos[0], 0, 565, 130);
+		ctx.drawImage(app.maps.img[2], xPos[1], 0, 565, 130);
+		ctx.drawImage(app.maps.img[3], xPos[2], 0, 565, 130);
+		for(var element in xPos) {
+			xPos[element] -= 1;
+			if (xPos[element]==-565) {
+				xPos[element]+= 1695;
+			}
+		}
+	},
 
     // Used to hide all elements of the map screen
-    hide : function() 
-    {
-        var array = ["pac-input", "map-canvas", "slider", "sliderShell", "labelShell", "label1",
-          "label2", "label3", "cityscape-canvas", "scrolling"];
-        for(element in array) {
-          document.getElementById(array[element]).className += " invisible";
-        }
-    },
+    // hide : function() 
+    // {
+    //     var array = ["pac-input", "mapCanvas", "slider", "sliderShell", "labelShell", "label1",
+    //       "label2", "label3", "cityscape-canvas", "scrolling", "buttonShell", "mapShell"];
+    //     for(var element in array) {
+    //     	var id = document.getElementById(array[element]);
+    //     	if(!(id===null)) {
+    //     		id.className += " invisible";
+    //     	}
+    //     }
+    // },
 
     /*
      * sends data from maps over to the game

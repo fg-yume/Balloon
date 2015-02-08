@@ -12,11 +12,13 @@
     <!-- Search box and map -->
     <div id="mapShell" class="sky">
       <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-      <div id="map-canvas"></div>
+      <div id="mapCanvas"></div>
     </div>
 
     <!-- Button to start game -->
-    <button type="button" id="startButton">Start game</button>
+    <div id="buttonShell" class="sky">
+      <button type="button" id="startButton" class="sky">Start game</button>
+    </div>
 
     <!-- Slider and labels -->
     <div id="sliderShell" class="sky">
@@ -31,7 +33,11 @@
     <!-- Canvas for scrolling background -->
     <canvas id="scrolling" width="1000" height="130"></canvas>
 
-	  
+	  <!-- Audio -->
+    <audio id="track" src="audio/Track.ogg"></audio>
+    <audio id="bite" src="audio/bite.ogg"></audio>
+    <audio id="drink" src="audio/drink.ogg"></audio>
+    <audio id="gameOver" src="audio/Game Over.ogg"></audio>
   	
   	<!-- Includes -->
   	<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
