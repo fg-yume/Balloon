@@ -3,7 +3,10 @@
 var app = app || {};
 
 app.game = {
-	currentState	: app.GAME_STATE.GAME,
+	BUTTON_WIDTH	: 200,
+	BUTTON_HEIGHT	: 75,
+
+	currentState	: app.GAME_STATE.MAIN,
 	foodObstacle	: undefined,
 	obstacles		: undefined,
 	startTime		: undefined,
@@ -12,6 +15,13 @@ app.game = {
 	timeElapsed		: undefined,
 	totalTime		: 0,
 	difficulty		: 0,
+	score			: 0,
+
+	// buttons
+	buttonBack		: undefined,
+	buttonPlay		: undefined,
+	buttonInstruction: undefined,
+
 
 	// functions ------------------------------
 	
@@ -25,7 +35,6 @@ app.game = {
 
 		this.previousTime = new Date().getTime();
 		
-		// TODO: grab API data
 		this.obstacles = new Array();
 
 		this.difficulty = jsonData.total;
@@ -39,9 +48,24 @@ app.game = {
 		// populate array
 		this.obstacles.push(foodObstacle);
 		this.obstacles.push(test);
+
+		// setup buttons
+		this.buttonBack = new app.Button((app.canvas.width / 2) - this.BUTTON_WIDTH/2, 500, app.resources.ui.backButton);
+		this.buttonPlay = new app.Button( (app.canvas.width / 2) - this.BUTTON_WIDTH/2, 500, app.resources.ui.playButton);
+		this.buttonInstruction = new app.Button( (app.canvas.width / 2) - this.BUTTON_WIDTH/2, 400, app.resources.ui.rulesButton);
 		
+
+		this.currentState = app.GAME_STATE.MAIN;
 		// Start game
 		this.loop();
+	},
+
+	reset : function()
+	{
+		score = 0;
+		this.previousTime = new Date().getTime();
+		
+		this.obstacles = new Array();
 	},
 	
 	/*
@@ -60,6 +84,9 @@ app.game = {
 	 */
 	update : function()
 	{
+		// update mouse
+		app.input.mouse.updateClick();
+
 		// check time elapsed
 		var timeNow = new Date().getTime();
 		this.timeElapsed = timeNow - this.previousTime;
@@ -67,15 +94,60 @@ app.game = {
 		// set previous time
 		this.previousTime = timeNow;
 		
-		// update obstacles
-		for(var key in this.obstacles){
-			this.obstacles[key].update(this.timeElapsed);
-		}
+		switch(this.currentState)
+		{
+			// Main Menu
+			case app.GAME_STATE.MAIN:
+			{
 
-		// update player
-		this.player.update(this.timeElapsed);
+				if(app.input.mouse.clicked)
+				{
+					this.checkButtons();
+				}
 
-		this.handleCollisions();
+				break;
+			}
+
+			// Instructions
+			case app.GAME_STATE.INSTRUCTION:
+			{
+				if(app.input.mouse.clicked)
+				{
+					this.checkButtons();
+				}
+
+				break;
+			}
+
+			// Credits
+			case app.GAME_STATE.CREDITS:
+			{
+				if(app.input.mouse.clicked)
+				{
+					this.checkButtons();
+				}
+
+				break;
+			}
+
+
+			// GAME
+			case app.GAME_STATE.GAME:
+			{
+
+				// update obstacles
+				for(var key in this.obstacles){
+					this.obstacles[key].update(this.timeElapsed);
+				}
+
+				// update player
+				this.player.update(this.timeElapsed);
+
+				this.handleCollisions();
+
+				break;
+			}
+		}	
 	},
 	
 	/*
@@ -87,36 +159,80 @@ app.game = {
 
 		// clear screen
 		app.ctx.clearRect(0, 0, app.canvas.width, app.canvas.height);
-		
-		// draw scrolling background
-		this.totalTime += this.timeElapsed;
 
-		var velocityX	= 5;
-		var bgPosX		= this.totalTime * velocityX % app.resources.bg.background.width;
-		var numImages 	= Math.ceil(app.canvas.width / app.resources.bg.background.width);
-
-		app.ctx.save(); 
-		app.ctx.translate(-bgPosX, 0);
-
-		for(var i = 0; i < numImages; i++)
+		switch(this.currentState)
 		{
-			app.ctx.drawImage(app.resources.bg.background, i * app.resources.bg.background.width, -1000);
+			case app.GAME_STATE.MAIN:
+			{
+				// background
+				app.ctx.drawImage(app.resources.screens.homeScreen, 0, 0, app.canvas.width, app.canvas.height);
+
+				// buttons
+				this.buttonPlay.draw();
+				this.buttonInstruction.draw();
+
+				break;
+			}
+
+			case app.GAME_STATE.INSTRUCTION:
+			{
+				this.buttonBack.draw();
+
+				break;
+			}
+
+			case app.GAME_STATE.GAME:
+			{
+				// draw scrolling background
+				this.totalTime += this.timeElapsed;
+
+				//ctx.drawImage(app.resources.bg.background, 0, 0, 565, 130);
+    			//ctx.drawImage(app.resources.bg.background, 565, 0, 565, 130);
+    			//ctx.drawImage(app.resources.bg.background, 0, 0, 1190, 755, 450, 15, 100, 60);
+
+				//app.ctx.save(); 
+				//app.ctx.translate(-bgPosX, 0);
+
+				//app.ctx.drawImage(app.resources.bg.background, 0, 0, app.canvas.width, app.canvas.height);
+
+				//app.ctx.restore();
+
+				// draw obstacles
+				for(var key in this.obstacles)
+				{
+					this.obstacles[key].draw();
+				}
+		
+				// draw player
+				this.player.draw();
+		
+		
+				break;
+			}
 		}
-		//app.ctx.drawImage(app.resources.bg.background, 0, 0, app.canvas.width, app.canvas.height);
-
-
-		app.ctx.restore();
 	
-		// draw obstacles
-		for(var key in this.obstacles)
-		{
-			this.obstacles[key].draw();
-		}
-		
-		// draw player
-		this.player.draw();
-		
 		app.ctx.restore();
+		
+	},
+
+	checkButtons : function()
+	{
+		console.log("mouse click: " + app.input.mouse.clicked);
+		console.log("check buttons!");
+		switch(this.currentState)
+		{
+			case app.GAME_STATE.MAIN:
+			{
+				var t = app.utility.intersects(app.input.mouse.x, app.input.mouse.y, 0, 0, 
+						this.buttonPlay.x, this.buttonPlay.y, this.BUTTON_WIDTH, this.BUTTON_HEIGHT);
+
+				console.log("collisions: " + t);
+				if(t == true)
+				{
+					this.currentState = app.GAME_STATE.GAME;
+				}
+			}
+		}
 	},
 	
 	/*
