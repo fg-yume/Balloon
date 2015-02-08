@@ -5,6 +5,7 @@ var app = app || {};
 
 // The various resources available for the game
 app.resources = {
+	// yuk
 	burgerLoaded	: false,
 	friesLoaded		: false,
 	icecreamLoaded	: false,
@@ -16,10 +17,14 @@ app.resources = {
 	chickenLoaded	: false,
 
 	homeScreenLoaded	: false,
+	rulesScreenLoaded	: false,
+	creditsScreenLoaded	: false,
+	gameOverScreenLoaded: false,
 
 	playButtonLoaded	: false,
 	rulesButtonLoaded	: false,
 	backButtonLoaded	: false,
+	replayButtonLoaded	: false,
 
 	backgroundLoaded	: false,
 	backgroundTwoLoaded : false,
@@ -42,14 +47,18 @@ app.resources = {
 
 	// screens available
 	screens : {
-		homeScreen	: new Image()
+		homeScreen		: new Image(),
+		rulesScreen		: new Image(),
+		creditsScreen	: new Image(),
+		gameOverScreen	: new Image()
 	},
 
 	// ui elements available
 	ui : {
 		playButton	: new Image(),
 		rulesButton : new Image(),
-		backButton	: new Image()
+		backButton	: new Image(),
+		replayButton : new Image()
 	},
 
 	bg : {
@@ -98,6 +107,15 @@ app.resources = {
 		this.screens.homeScreen.addEventListener("load", function(){
 			app.resources.homeScreenLoaded = true;
 		});
+		this.screens.rulesScreen.addEventListener("load", function(){
+			app.resources.rulesScreenLoaded = true;
+		});
+		this.screens.creditsScreen.addEventListener("load", function(){
+			app.resources.creditsScreenLoaded = true;
+		});
+		this.screens.gameOverScreen.addEventListener("load", function(){
+			app.resources.gameOverScreenLoaded = true;
+		});
 
 
 		this.ui.playButton.addEventListener("load", function(){
@@ -108,6 +126,9 @@ app.resources = {
 		});
 		this.ui.backButton.addEventListener("load", function(){
 			app.resources.backButtonLoaded = true;
+		});
+		this.ui.replayButton.addEventListener("load", function(){
+			app.resources.replayButtonLoaded = true;
 		});
 
 
@@ -131,14 +152,18 @@ app.resources = {
 		this.food.donut.src 	= "assets/art/Donut.png";
 
 		this.screens.homeScreen.src = "assets/art/homescreen.png";
+		this.screens.gameOverScreen.src = "assets/art/credits.png";
+		this.screens.rulesScreen.src = "assets/art/Rules.png";
+		this.screens.creditsScreen.src = "assets/art/credits.png";
 
-		this.ui.playButton.src 		= "assets/art/Play.png";
+		this.ui.playButton.src 		= "assets/art/play_button.png";
 		this.ui.rulesButton.src 	= "assets/art/Rules.png";
 		this.ui.backButton.src      = "assets/art/back.png";
+		this.ui.replayButton.src    = "assets/art/Replay.png";
 
 		this.bg.background.src 		= "assets/art/bkgd.png";
 
-		this.player.src 			= "assets/art/playerweightsall.png";
+		this.player.src 			= "assets/art/Person.png";
 	},
 	
 	/*
@@ -154,6 +179,8 @@ app.resources = {
 				this.donutLoaded && this.homeScreenLoaded &&
 				this.playButtonLoaded && this.rulesButtonLoaded &&
 				this.backButtonLoaded && this.backgroundLoaded &&
-				this.playerLoaded;
+				this.playerLoaded && this.gameOverScreenLoaded && 
+				this.rulesScreenLoaded && this.creditsScreenLoaded &&
+				this.replayButtonLoaded;
 	}
 };
