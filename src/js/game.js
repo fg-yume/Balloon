@@ -25,7 +25,7 @@ app.game = {
 	// graphics
 	x1				: 0,
 	x2				: 3000,
-	SPAWN_BASE		: 120,
+	SPAWN_BASE		: 80,
 	timeUntilNextSpawn : 60,
 
 
