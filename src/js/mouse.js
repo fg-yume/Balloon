@@ -33,6 +33,8 @@ app.Mouse = (function()
 			{
 				console.log("mouse down");
 				this.clicked = false;
+
+				console.log("[" + this.pos.x + "," + this.pos.y + "]");
 				break;
 			}
 			
@@ -40,6 +42,7 @@ app.Mouse = (function()
 			{
 				console.log("mouse drag");
 				this.clicked = false;
+
 				break;
 			}
 		
@@ -47,6 +50,8 @@ app.Mouse = (function()
 			{
 				console.log("mouse click");
 				this.clicked = true;
+
+				console.log("[" + this.pos.x + "," + this.pos.y + "]");
 				break;
 			}
 			

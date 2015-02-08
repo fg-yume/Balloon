@@ -8,6 +8,7 @@ app.game = {
 	obstacles		: undefined,
 	startTime		: undefined,
 	previousTime	: undefined,
+	player			: undefined,
 
 	// functions ------------------------------
 	
@@ -22,7 +23,8 @@ app.game = {
 		this.obstacles = new Array();
 		
 		// Create obstacles
-		this.foodObstacle = new app.Obstacle(app.resources.food.burger, 300, 500);
+		this.foodObstacle = new app.Obstacle(app.resources.food.burger, 300, 30);
+		this.player			= new app.Player();
 		
 		// populate array
 		this.obstacles.push(this.foodObstacle);
@@ -52,19 +54,34 @@ app.game = {
 		this.previousTime = timeNow;
 		
 		// update obstacles
-		this.foodObstacle.update(timeElapsed);
+		for(var key in this.obstacles){
+			this.obstacles[key].update(timeElapsed);
+		}
+
+		// update player
+		pl
+
+		//this.foodObstacle.update(timeElapsed);
 	},
 	
 	draw : function()
 	{
 		app.ctx.save();
+
+		// clear screen
+		app.ctx.clearRect(0, 0, app.canvas.width, app.canvas.height);
 		
 		// draw background
-		app.ctx.fillStyle = "blue";
-		app.ctx.fillRect(0, 0, app.canvas.width, app.canvas.height);
+		app.ctx.drawImage(app.resources.bg.background, 0, 0, app.canvas.width, app.canvas.height);
 	
 		// draw obstacles
-		this.foodObstacle.draw();
+		for(var key in this.obstacles)
+		{
+			this.obstacles[key].draw();
+		}
+		
+		// draw player
+
 		
 		app.ctx.restore();
 	},

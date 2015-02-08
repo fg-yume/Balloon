@@ -19,6 +19,11 @@ app.resources = {
 
 	playButtonLoaded	: false,
 	rulesButtonLoaded	: false,
+	backButtonLoaded	: false,
+
+	backgroundLoaded	: false,
+
+	playerLoaded		: false,
 	
 	// various food types available
 	food : {
@@ -42,8 +47,15 @@ app.resources = {
 	// ui elements available
 	ui : {
 		playButton	: new Image(),
-		rulesButton : new Image()
-	}
+		rulesButton : new Image(),
+		backButton	: new Image()
+	},
+
+	bg : {
+		background	: new Image()
+	},
+
+	player 			: new Image(),
 	
 	doneLoaded		: false,
 	
@@ -69,7 +81,7 @@ app.resources = {
 			app.resources.hotdogLoaded = true;
 		});
 		this.food.chicken.addEventListener("load", function(){
-			app.resouces.chickenLoaded = true;
+			app.resources.chickenLoaded = true;
 		});
 		this.food.soda.addEventListener("load", function(){
 			app.resources.sodaLoaded = true;
@@ -81,15 +93,29 @@ app.resources = {
 			app.resources.donutLoaded = true;
 		});
 
+
 		this.screens.homeScreen.addEventListener("load", function(){
 			app.resources.homeScreenLoaded = true;
 		});
+
 
 		this.ui.playButton.addEventListener("load", function(){
 			app.resources.playButtonLoaded = true;
 		});
 		this.ui.rulesButton.addEventListener("load", function(){
 			app.resources.rulesButtonLoaded = true;
+		});
+		this.ui.backButton.addEventListener("load", function(){
+			app.resources.backButtonLoaded = true;
+		});
+
+
+		this.bg.background.addEventListener("load", function(){
+			app.resources.backgroundLoaded = true;
+		});
+
+		this.player.addEventListener("load", function(){
+			app.resources.playerLoaded = true;
 		});
 		
 		// Load the images
@@ -107,6 +133,11 @@ app.resources = {
 
 		this.ui.playButton.src 		= "assets/art/Play.png";
 		this.ui.rulesButton.src 	= "assets/art/Rules.png";
+		this.ui.backButton.src      = "assets/art/back.png";
+
+		this.bg.background.src 		= "assets/art/bkgd.png";
+
+		this.player.src 			= "assets/art/playerweightsall.png";
 	},
 	
 	/*
@@ -120,6 +151,8 @@ app.resources = {
 				this.hotdogLoaded && this.chickenLoaded && 
 				this.sodaLoaded && this.tacoLoaded &&
 				this.donutLoaded && this.homeScreenLoaded &&
-				this.playButtonLoaded && this.rulesButtonLoaded;
+				this.playButtonLoaded && this.rulesButtonLoaded &&
+				this.backButtonLoaded && this.backgroundLoaded &&
+				this.playerLoaded;
 	}
 };

@@ -52,3 +52,11 @@ html, body, #map-canvas {
   padding-left: 14px;
   width: 50%;
 }
+#canvas{
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  
+}

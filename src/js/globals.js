@@ -6,7 +6,7 @@ var app = app || {};
 // Canvas element in the HTML page
 app.canvas		= document.querySelector("#canvas");
 // Drawing context for the game
-app.ctx			= canvas.getContext("2d");
+app.ctx			= app.canvas.getContext("2d");
 // Frame rate for the game
 app.FRAME_RATE	= 60;
 // The animation id for the canvas
@@ -41,5 +41,16 @@ app.MOUSE_STATE = {
 	NUM_STATES	: 3
 };
 
+// Offset of the canvas element from the left of the window
 app.OFFSET_LEFT = app.canvas.getBoundingClientRect().left;
+// Offset of the canvas element from the top of the window
 app.OFFSET_TOP	= app.canvas.getBoundingClientRect().top;
+
+// Specific keys that will be used as controls
+app.KEYS = {
+	LEFT  : 37,
+	UP    : 38,
+	RIGHT : 39,
+	DOWN  : 40,
+	PAUSE : 80
+}

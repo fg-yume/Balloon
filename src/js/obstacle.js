@@ -7,7 +7,7 @@ var app = app || {};
  */
 app.Obstacle = (function()
 {
-	var BASE_X		= app.canvas.width + (app.canvas.height / 10.0);
+	var BASE_X		= app.canvas.width + (app.canvas.width / 10.0) + app.OFFSET_LEFT;
 	var BASE_Y		= app.canvas.height / 2;
 	var BASE_SPEED	= -5;
 
@@ -33,7 +33,12 @@ app.Obstacle = (function()
 	 */
 	Obstacle.prototype.update = function(timeElapsed)
 	{
+		//console.log(timeElapsed);
+		//console.log(app.FRAME_RATE);
+
 		this.x += this.speed * (timeElapsed/app.FRAME_RATE);
+		//console.log("[" + this.x + "," + this.y + "]");
+		//console.log(this.image);
 	};
 	
 	/*
@@ -43,6 +48,9 @@ app.Obstacle = (function()
 	{
 		app.ctx.save();
 		
+		//app.ctx.fillStyle = "green";
+		//app.ctx.fillRect(300, 200, 100, 100);
+
 		app.ctx.drawImage(this.image, this.x, this.y, 50, 50);
 		
 		app.ctx.restore();

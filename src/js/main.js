@@ -11,6 +11,7 @@ Modernizr.load(
 			"js/mouse.js",
 			"js/controls.js",
 			"js/obstacle.js",
+			"js/player.js",
 			"js/resources.js",
 			"js/game.js",
 			"js/balloon.js"
