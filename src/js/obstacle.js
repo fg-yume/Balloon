@@ -33,7 +33,7 @@ app.Obstacle = (function()
 	 */
 	Obstacle.prototype.update = function(timeElapsed)
 	{
-		//this.x += this.speed * (timeElapsed/app.FRAME_RATE);
+		this.x += this.speed * (timeElapsed/app.FRAME_RATE);
 	};
 	
 	/*

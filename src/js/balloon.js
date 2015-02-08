@@ -41,7 +41,7 @@ app.main = {
 				
 				if(app.resources.doneLoaded == true)
 				{
-					this.currentState = app.APP_STATE.GAME;
+					this.currentState = app.APP_STATE.MAP;
 					console.log(" DONE LOADING ");
 					
 					this.changeAppState();
@@ -72,11 +72,18 @@ app.main = {
 	{
 		switch(this.currentState)
 		{
+			case app.APP_STATE.MAP:
+			{
+				app.maps.initialize();
+				break;
+			}
+		
 			// When switching to game
 			case app.APP_STATE.GAME:
 			{
 				// Game Setup
 				app.game.init();
+				break;
 			}
 			
 			default:

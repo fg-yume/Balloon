@@ -6,6 +6,7 @@ var app = app || {};
 Modernizr.load(
 {
 		load : [
+			"js/maps.js",
 			"js/globals.js",	
 			"js/mouse.js",
 			"js/controls.js",
