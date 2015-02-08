@@ -222,7 +222,7 @@ app.maps = {
     	console.log(jsonString);
 
     	// hide map
-    	document.querySelector("#map-canvas").style.display = "none";
+    	document.querySelector("#mapShell").style.display = "none";
 
     	app.game.init(this.hitMap);
     }

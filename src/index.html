@@ -5,7 +5,11 @@
   </head>
   
   <body>
-	  <!-- Search box and map -->
+	  
+    <!-- Canvas for game -->
+    <canvas id="canvas" width="1000" height="700"></canvas>
+
+    <!-- Search box and map -->
     <div id="mapShell" class="sky">
       <input id="pac-input" class="controls" type="text" placeholder="Search Box">
       <div id="map-canvas"></div>
@@ -27,8 +31,7 @@
     <!-- Canvas for scrolling background -->
     <canvas id="scrolling" width="1000" height="130"></canvas>
 
-	  <!-- Canvas for game -->
-  	<canvas id="canvas" width="1000" height="700"></canvas>
+	  
   	
   	<!-- Includes -->
   	<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
