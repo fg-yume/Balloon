@@ -85,7 +85,7 @@ app.Player = (function()
 		app.ctx.save();
 
 		// offset the image based on the amount of hp the player has left
-		app.ctx.drawImage(app.resources.player, (this.currentFrame + (12-4*hp)) * 1198, 0, 1198, 1200, this.x, this.y, 150, 150);
+		app.ctx.drawImage(app.resources.player, (this.currentFrame + (12-4*this.hp)) * 800, 0, 800, 800, this.x, this.y, 150, 150);
 
 		app.ctx.restore();
 	};

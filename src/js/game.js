@@ -270,6 +270,12 @@ app.game = {
 		
 				break;
 			}
+			// case app.GAME_STATE.:
+			// {
+
+
+			// 	break;
+			// }
 		}
 	
 		app.ctx.restore();
