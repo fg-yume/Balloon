@@ -55,7 +55,7 @@
         border-color: #4d90fe;
         margin-left: -1px;
         padding-left: 14px;
-        width: 401px;
+        width: 50%;
       }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
@@ -103,7 +103,6 @@
       
       // Invoked every time a player selects a location
       function mainSearch(searchBox, service) {
-        hide();
         clearMarkers();
         var places = searchBox.getPlaces();
         if(places.length===0) {
