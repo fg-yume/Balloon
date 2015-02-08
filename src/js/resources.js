@@ -15,6 +15,11 @@ app.resources = {
 	tacoLoaded		: false,
 	chickenLoaded	: false,
 
+	trackLoaded		: false,
+	biteLoaded		: false,
+	drinkLoaded		: false,
+	gameOverLoaded	: false,
+
 	homeScreenLoaded	: false,
 
 	playButtonLoaded	: false,
@@ -38,6 +43,14 @@ app.resources = {
 		soda		: new Image(),
 		donut		: new Image(),
 		taco        : new Image()
+	},
+
+	// soundtrack
+	audio : {
+		track		: new Audio(),
+		bite		: new Audio(),
+		drink		: new Audio(),
+		gameOver	: new Audio()
 	},
 
 	// screens available
@@ -95,6 +108,20 @@ app.resources = {
 		});
 
 
+		this.audio.track.addEventListener("load", function(){
+			app.resources.trackLoaded = true;
+		})
+		this.audio.bite.addEventListener("load", function(){
+			app.resources.biteLoaded = true;
+		})
+		this.audio.drink.addEventListener("load", function(){
+			app.resources.drinkLoaded = true;
+		})
+		this.audio.gameOver.addEventListener("load", function(){
+			app.resources.gameOverLoaded = true;
+		})
+
+
 		this.screens.homeScreen.addEventListener("load", function(){
 			app.resources.homeScreenLoaded = true;
 		});
@@ -130,6 +157,11 @@ app.resources = {
 		this.food.taco.src  	= "assets/art/Taco.png";
 		this.food.donut.src 	= "assets/art/Donut.png";
 
+		this.audio.track.src 	= "audio/Track.ogg";
+		this.audio.bite.src 	= "audio/bite.ogg";
+		this.audio.drink.src 	= "audio/drink.ogg";
+		this.audio.gameOver.src = "audio/Game Over.ogg";
+
 		this.screens.homeScreen.src = "assets/art/homescreen.png";
 
 		this.ui.playButton.src 		= "assets/art/Play.png";
@@ -139,6 +171,8 @@ app.resources = {
 		this.bg.background.src 		= "assets/art/bkgd.png";
 
 		this.player.src 			= "assets/art/playerweightsall.png";
+
+
 	},
 	
 	/*
@@ -151,7 +185,9 @@ app.resources = {
 				this.icecreamLoaded && this.pizzaLoaded &&
 				this.hotdogLoaded && this.chickenLoaded && 
 				this.sodaLoaded && this.tacoLoaded &&
-				this.donutLoaded && this.homeScreenLoaded &&
+				this.donutLoaded && this.trackLoaded &&
+				this.biteLoaded && this.drinkLoaded &&
+				this.gameOverLoaded && this.homeScreenLoaded &&
 				this.playButtonLoaded && this.rulesButtonLoaded &&
 				this.backButtonLoaded && this.backgroundLoaded &&
 				this.playerLoaded;

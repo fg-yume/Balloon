@@ -166,6 +166,7 @@ app.maps = {
     {
         var canvas = document.querySelector("#scrolling");
         var ctx = canvas.getContext("2d");
+        var xPos = [0, 565, 1130];
 
         this.img['cityscape'] = new Image();
         this.img['cityscape'].onload = function() {
@@ -179,32 +180,34 @@ app.maps = {
         }
         this.img[2].src = "assets/art/bkgd.png";
 
-        this.img['play'] = new Image();
-        this.img['play'].onload = function() {
-        	ctx.drawImage(app.maps.img['play'], 0, 0, 4000, 1000, 300, 15, 400, 100);
+        this.img[3] = new Image();
+        this.img[3].onload = function() {
+        	ctx.drawImage(app.maps.img[3], 1130, 0, 565, 130);
         }
-        this.img['play'].src = "assets/art/play_button.png";
+        this.img[3].src = "assets/art/bkgd.png";
 
-        window.setInterval(app.maps.update, 1000);
+        window.setInterval(function() {app.maps.update(ctx, xPos)}, 100);
     },
 
-    update : function()
+    update : function(ctx, xPos)
     {
-    	var canvas = document.querySelector("#scrolling");
-    	var ctx = canvas.getContext("2d");
-
     	ctx.clearRect(0,0,1000,130);
-    	// 1190x755
-    	ctx.drawImage(app.maps.img['cityscape'], 0, 0, 565, 130);
-    	ctx.drawImage(app.maps.img[2], 565, 0, 565, 130);
-    	ctx.drawImage(app.maps.img['play'], 0, 0, 1190, 755, 450, 15, 100, 60);
+    	ctx.drawImage(app.maps.img['cityscape'], xPos[0], 0, 565, 130);
+    	ctx.drawImage(app.maps.img[2], xPos[1], 0, 565, 130);
+    	ctx.drawImage(app.maps.img[3], xPos[2], 0, 565, 130);
+    	for(var element in xPos) {
+    		xPos[element] -= 1;
+    		if (xPos[element]==-565) {
+    			xPos[element]+= 1695;
+    		}
+    	}
     },
 
     // Used to hide all elements of the map screen
     hide : function() 
     {
         var array = ["pac-input", "mapCanvas", "slider", "sliderShell", "labelShell", "label1",
-          "label2", "label3", "cityscape-canvas", "scrolling"];
+          "label2", "label3", "cityscape-canvas", "scrolling", "buttonShell", "mapShell"];
         for(element in array) {
           document.getElementById(array[element]).className += " invisible";
         }
