@@ -48,6 +48,11 @@ app.maps = {
 
         this.draw();
 
+        for(var element in this.fastFood) {
+        	this.hitMap[this.fastFood[element]] = 0;
+        }
+        this.hitMap['total'] = 0
+
         // Set up the search listener
         google.maps.event.addListener(searchBox, 'places_changed', function() { app.maps.mainSearch(searchBox, service) });
 	},
