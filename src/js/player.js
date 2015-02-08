@@ -3,7 +3,7 @@
 // Encompass application in this variable
 var app = app || {};
 
-app.player = (function()
+app.Player = (function()
 {
 	var STANDARD_WIDTH = 50;
 	var STANDARD_HEIGHT = 100;
@@ -20,9 +20,9 @@ app.player = (function()
 	{
 		this.hp		= 10;
 		this.speed	= 3;
-		this.x		= 50;
-		this.y		= app.ctx.height - 10.0;
-		this.z		= app.player.MAX_Z;			// "z axis for depth"
+		this.x		= 300;
+		this.y		= 40; //app.canvas.height - 100.0;
+		this.z		= app.Player.MAX_Z;			// "z axis for depth"
 		this.image 	= app.resources.player;
 
 		// time tracking purposes
@@ -44,7 +44,7 @@ app.player = (function()
 	{
 		this.timeElapsed += dt;
 
-		if(this.timeElapsed >= app.player.TIME_FOR_ANIMATION)
+		if(this.timeElapsed >= app.Player.TIME_FOR_ANIMATION)
 		{
 			if(this.currentFrame == 0)
 				this.currentFrame = 1;
@@ -86,10 +86,10 @@ app.player = (function()
 	{
 		app.ctx.save();
 
-		app.ctx.drawImage(this.image, this.currentFrame * app.player.STANDARD_WIDTH, 0, app.player.STANDARD_WIDTH, app.player.STANDARD_HEIGHT,
-			this.x, this.y, app.player.STANDARD_WIDTH, app.player.STANDARD_HEIGHT);
+		app.ctx.drawImage(this.image, this.currentFrame * app.Player.STANDARD_WIDTH, 0, app.Player.STANDARD_WIDTH, app.Player.STANDARD_HEIGHT,
+			this.x, this.y, app.Player.STANDARD_WIDTH, app.Player.STANDARD_HEIGHT);
 
-		console.log(this.x + " " + this.y);
+		//console.log(this.x + " " + this.y);
 
 		app.ctx.restore();
 	};
