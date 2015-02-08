@@ -26,8 +26,17 @@ html, body, #map-canvas {
 .sky {
   background-color: #afe1f2;
 }
-#cityscape {
-  height: 10%;
+#mapShell {
+  height: 500px;
+  width: 1000px;
+}
+#sliderShell {
+  height: 20px;
+  width: 1000px;
+}
+#labelShell {
+  height: 20px;
+  width: 1000px;
 }
 #slider {
   width: 50%;

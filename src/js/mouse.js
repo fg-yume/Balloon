@@ -47,6 +47,7 @@ app.Mouse = (function()
 			{
 				console.log("mouse click");
 				this.clicked = true;
+				console.log("[" + this.pos.x + "," + this.pos.y + "]");
 				break;
 			}
 			

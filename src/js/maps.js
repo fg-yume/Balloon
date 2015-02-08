@@ -18,6 +18,8 @@ app.maps = {
 	map : undefined,
 	// hitMap stores the number of hits of each of the fastFood restaurants
 	hitMap : [],
+	// Stores images that need to be painted and repainted
+	img : [],
 
 	/*
 	 * Initializes the map using the google maps API
@@ -43,6 +45,8 @@ app.maps = {
 
         // Set up the radar search
         var service = new google.maps.places.PlacesService(this.map);
+
+        this.draw();
 
         // Set up the search listener
         google.maps.event.addListener(searchBox, 'places_changed', function() { app.maps.mainSearch(searchBox, service) });
@@ -98,6 +102,7 @@ app.maps = {
 	    }
   	},
 
+  	// Invoked repeatedly by radarSearch (above)
   	callback : function(results, status, name) 
   	{
 	    // Creates a marker for each hit
@@ -131,14 +136,47 @@ app.maps = {
 	// Used to move the cityscape at the bottom
     draw : function() 
     {
-        var canvas = document.getElementById('canvas').getContext('2d');
+        var canvas = document.querySelector("#scrolling");
+        var ctx = canvas.getContext("2d");
+
+        this.img['cityscape'] = new Image();
+        this.img['cityscape'].onload = function() {
+        	ctx.drawImage(app.maps.img['cityscape'], 0, 0, 565, 130);
+        };
+        this.img['cityscape'].src = "assets/art/bkgd.png";
+
+        this.img[2] = new Image();
+        this.img[2].onload = function() {
+        	ctx.drawImage(app.maps.img[2], 565, 0, 565, 130);
+        }
+        this.img[2].src = "assets/art/bkgd.png";
+
+        this.img['play'] = new Image();
+        this.img['play'].onload = function() {
+        	ctx.drawImage(app.maps.img['play'], 0, 0, 4000, 1000, 300, 15, 400, 100);
+        }
+        this.img['play'].src = "assets/art/play_button.png";
+
+        window.setInterval(app.maps.update, 1000);
+    },
+
+    update : function()
+    {
+    	var canvas = document.querySelector("#scrolling");
+    	var ctx = canvas.getContext("2d");
+
+    	ctx.clearRect(0,0,1000,130);
+    	// 1190x755
+    	ctx.drawImage(app.maps.img['cityscape'], 0, 0, 565, 130);
+    	ctx.drawImage(app.maps.img[2], 565, 0, 565, 130);
+    	ctx.drawImage(app.maps.img['play'], 0, 0, 1190, 755, 450, 15, 100, 60);
     },
 
     // Used to hide all elements of the map screen
     hide : function() 
     {
         var array = ["pac-input", "map-canvas", "slider", "sliderShell", "labelShell", "label1",
-          "label2", "label3", "cityscape-canvas"];
+          "label2", "label3", "cityscape-canvas", "scrolling"];
         for(element in array) {
           document.getElementById(array[element]).className += " invisible";
         }
