@@ -24,6 +24,7 @@ app.game = {
 		
 		// Create obstacles
 		this.foodObstacle = new app.Obstacle(app.resources.food.burger, 300, 30);
+		var test = new app.Obstacle(app.resources.food.burger, 400, 30);
 		this.player			= new app.Player();
 		
 		// populate array
@@ -59,7 +60,7 @@ app.game = {
 		}
 
 		// update player
-		pl
+		this.player.update();
 
 		//this.foodObstacle.update(timeElapsed);
 	},
@@ -81,7 +82,7 @@ app.game = {
 		}
 		
 		// draw player
-
+		this.player.draw();
 		
 		app.ctx.restore();
 	},
