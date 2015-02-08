@@ -39,12 +39,7 @@ app.Player = (function()
 		if(this.timeElapsed >= TIME_FOR_ANIMATION)
 		{
 			this.currentFrame++;
-
-			if(this.currentFrame == 3)
-			{
-				this.currentFrame = 0;
-				
-			}
+			this.currentFrame = this.currentFrame % 3;
 
 			this.timeElapsed = 0;
 				
@@ -58,22 +53,30 @@ app.Player = (function()
 	{
 		if(app.input.keydown[app.KEYS.LEFT])
 		{
-			this.x -= this.speed * (app.game.timeElapsed/app.FRAME_RATE);
+			if(this.x >= 25) {
+				this.x -= this.speed * 1 //(app.game.timeElapsed/app.FRAME_RATE);
+			}
 		}
 
 		if(app.input.keydown[app.KEYS.UP])
 		{
-			this.y -= this.speed * (app.game.timeElapsed/app.FRAME_RATE);
+			if(this.y >= 0) {
+				this.y -= this.speed * 1 //(app.game.timeElapsed/app.FRAME_RATE);
+			}
 		}
 
 		if(app.input.keydown[app.KEYS.DOWN])
 		{
-			this.y += this.speed * (app.game.timeElapsed/app.FRAME_RATE);
+			if(this.y <= 550) {
+				this.y += this.speed * 1 //(app.game.timeElapsed/app.FRAME_RATE);
+			} 
 		}
 
 		if(app.input.keydown[app.KEYS.RIGHT])
 		{
-			this.x += this.speed * (app.game.timeElapsed/app.FRAME_RATE);
+			if(this.x <= 825) {
+				this.x += this.speed * 1 //(app.game.timeElapsed/app.FRAME_RATE);
+			}
 		}
 	};
 
@@ -82,7 +85,7 @@ app.Player = (function()
 		app.ctx.save();
 
 		// offset the image based on the amount of hp the player has left
-		app.ctx.drawImage(app.resources.player, this.currentFrame * 300, 0, 150, 150);
+		app.ctx.drawImage(app.resources.player, this.currentFrame * 1198, 0, 1198, 1200, this.x, this.y, 150, 150);
 
 		app.ctx.restore();
 	};

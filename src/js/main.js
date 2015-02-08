@@ -7,7 +7,6 @@ Modernizr.load(
 {
 		load : [
 			"js/maps.js",
-			"js/audio.js",
 			"js/globals.js",	
 			"js/button.js",
 			"js/utility.js",
